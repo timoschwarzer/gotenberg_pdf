@@ -226,6 +226,12 @@ pub struct WebOptions {
     /// Enable PDF for Universal Access for optimal accessibility.
     pub pdfua: Option<bool>,
 
+    /// Encrypt the resulting PDF with this password
+    pub user_password: Option<String>,
+
+    /// Set the owner password of the resulting PDF
+    pub owner_password: Option<String>,
+
     /// Write PDF metadata.
     /// Not all metadata are writable. Consider taking a look at <https://exiftool.org/TagNames/XMP.html#pdf> for an (exhaustive?) list of available metadata.
     /// Caution: Writing metadata may compromise PDF/A compliance.
@@ -379,6 +385,14 @@ impl WebOptions {
             form = form.text("pdfua", pdfua.to_string());
         }
 
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
+        }
+
         if let Some(metadata) = self.metadata {
             form = form.text("metadata", serde_json::to_string(&metadata).unwrap());
         }
@@ -540,6 +554,14 @@ impl WebOptions {
             form = form.text("pdfua", pdfua.to_string());
         }
 
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
+        }
+
         if let Some(metadata) = self.metadata {
             form = form.text("metadata", serde_json::to_string(&metadata).unwrap());
         }
@@ -656,6 +678,12 @@ pub struct ScreenshotOptions {
 
     /// Fail a response if there are exceptions in the Chromium console.
     pub fail_on_console_exceptions: Option<bool>,
+
+    /// Encrypt the resulting PDF with this password
+    pub user_password: Option<String>,
+
+    /// Set the owner password of the resulting PDF
+    pub owner_password: Option<String>,
 }
 
 impl ScreenshotOptions {
@@ -750,6 +778,14 @@ impl ScreenshotOptions {
                 "failOnConsoleExceptions",
                 fail_on_console_exceptions.to_string(),
             );
+        }
+
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
         }
 
         form
@@ -852,6 +888,14 @@ impl ScreenshotOptions {
             );
         }
 
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
+        }
+
         form
     }
 }
@@ -934,6 +978,12 @@ pub struct DocumentOptions {
 
     /// Enable PDF for Universal Access for optimal accessibility.
     pub pdfua: Option<bool>,
+
+    /// Encrypt the resulting PDF with this password
+    pub user_password: Option<String>,
+
+    /// Set the owner password of the resulting PDF
+    pub owner_password: Option<String>,
 }
 
 /// Options for converting a document to a PDF using the LibreOffice engine.
@@ -1056,6 +1106,14 @@ impl DocumentOptions {
             form = form.text("pdfua", pdfua.to_string());
         }
 
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
+        }
+
         form
     }
 
@@ -1179,6 +1237,14 @@ impl DocumentOptions {
 
         if let Some(pdfua) = self.pdfua {
             form = form.text("pdfua", pdfua.to_string());
+        }
+
+        if let Some(user_password) = self.user_password {
+            form = form.text("userPassword", user_password.to_string());
+        }
+
+        if let Some(owner_password) = self.owner_password {
+            form = form.text("ownerPassword", owner_password.to_string());
         }
 
         form
